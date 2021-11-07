@@ -48,7 +48,7 @@ def main():
         data.append(values)
     with open('test.csv', 'w') as file:
         writer = csv.writer(file)
-        writer.writerow(data)
+        writer.writerows(data)
 
 if __name__ == "__main__":
     main()
