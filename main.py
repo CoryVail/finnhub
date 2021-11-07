@@ -47,7 +47,7 @@ def main():
             if column in dict:
                 values.append(dict[column])
         data.append(values)
-    with open('test.csv', 'w') as file:
+    with open('test.csv', 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(columns)
         writer.writerows(data)
