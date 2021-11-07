@@ -37,6 +37,8 @@ def main():
         for column in columns:
             if column in dict:
                 values.append(dict[column])
+            else:
+                values.append('')
         data.append(values)
     with open(f"{symbol}.csv", 'w', newline='') as file:
         writer = csv.writer(file)
