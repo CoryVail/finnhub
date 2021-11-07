@@ -39,7 +39,8 @@ def main():
     print(f"Columns: {columns}")
 
     # Loop through financials and add to database.
-    data = list(columns)
+    data = []
+#    data = list(columns)
     for dict in financials['financials']:
         values = []
         for column in columns:
@@ -48,6 +49,7 @@ def main():
         data.append(values)
     with open('test.csv', 'w') as file:
         writer = csv.writer(file)
+        writer.writerow(columns)
         writer.writerows(data)
 
 if __name__ == "__main__":
