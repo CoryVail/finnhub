@@ -23,3 +23,23 @@ Get financials for USAC and replace all previous database records for USAC:
 ```
 python3 main.py -s USAC --replace
 ```
+
+## GitHub
+
+Pull the repo:
+
+```
+git pull origin master
+```
+
+Checkout a new repo:
+
+```
+git checkout -b staging
+```
+
+Delete a repo (never the master repo):
+
+```
+git branch -d staging
+```
