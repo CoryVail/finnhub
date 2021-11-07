@@ -14,6 +14,9 @@ def main():
     )
     args = parser.parse_args()
 
+    # Get the stock symbol.
+    symbol = args.symbol.split(";")[0].strip()
+
     # Create a new Client object.
     c = finnhub.Client(api_key="sandbox_c620d3aad3iccpc4ang0")
     # Get the financials.
