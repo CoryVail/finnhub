@@ -11,3 +11,4 @@ static/
 htmlcov/
 .coverage
 debug/*
+*.csv
