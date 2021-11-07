@@ -1,7 +1,6 @@
 import argparse
 import csv
 import finnhub
-import sqlite3
 
 
 def main():
@@ -13,24 +12,14 @@ def main():
         required=True,
         help="The stock symbol of the company",
     )
-    parser.add_argument(
-        '--replace',
-        action='store_true',
-        help="Replace all existing records for the company (if specified)",
-    )
     args = parser.parse_args()
-
-    # Try to clean for SQL injections.
-    symbol = args.symbol.split(";")[0].strip()
 
     # Create a new Client object.
     c = finnhub.Client(api_key="sandbox_c620d3aad3iccpc4ang0")
     # Get the financials.
     financials = c.financials(symbol, 'ic','quarterly')
 
-    # Programmatically add columns to the database
-    # based on what the Client object contains.
-    # First, get the column names.
+    # Isolate the column names from the Client response.
     columns = []
     for dict in financials['financials']:
         for key, value in dict.items():
@@ -38,16 +27,15 @@ def main():
                 columns.append(key)
     print(f"Columns: {columns}")
 
-    # Loop through financials and add to database.
+    # Loop through financials and add to CSV.
     data = []
-#    data = list(columns)
     for dict in financials['financials']:
         values = []
         for column in columns:
             if column in dict:
                 values.append(dict[column])
         data.append(values)
-    with open('test.csv', 'w', newline='') as file:
+    with open(f"{symbol}.csv", 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(columns)
         writer.writerows(data)
