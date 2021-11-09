@@ -20,7 +20,7 @@ def main():
     # Create a new Client object.
     c = finnhub.Client(api_key="sandbox_c620d3aad3iccpc4ang0")
     # Get the financials.
-    financials = c.financials(symbol, 'ic','quarterly')
+    financials = c.financials(symbol, 'cf','quarterly')
 
     # Isolate the column names from the Client response.
     columns = []
