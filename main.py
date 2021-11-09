@@ -40,7 +40,63 @@ def main():
             else:
                 values.append('')
         data.append(values)
-    with open(f"{symbol}.csv", 'w', newline='') as file:
+    with open(f"{symbol}_cf.csv", 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(columns)
+        writer.writerows(data)
+        
+         # Create a new Client object for Income statement.
+    c = finnhub.Client(api_key="sandbox_c620d3aad3iccpc4ang0")
+    # Get the financials.
+    financials = c.financials(symbol, 'ic','quarterly')
+
+    # Isolate the column names from the Client response.
+    columns = []
+    for dict in financials['financials']:
+        for key, value in dict.items():
+            if key not in columns:
+                columns.append(key)
+    print(f"Columns: {columns}")
+
+    # Loop through financials and add to CSV.
+    data = []
+    for dict in financials['financials']:
+        values = []
+        for column in columns:
+            if column in dict:
+                values.append(dict[column])
+            else:
+                values.append('')
+        data.append(values)
+    with open(f"{symbol}_ic.csv", 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(columns)
+        writer.writerows(data)
+        
+         # Create a new Client object.
+    c = finnhub.Client(api_key="sandbox_c620d3aad3iccpc4ang0")
+    # Get the financials.
+    financials = c.financials(symbol, 'bs','quarterly')
+
+    # Isolate the column names from the Client response.
+    columns = []
+    for dict in financials['financials']:
+        for key, value in dict.items():
+            if key not in columns:
+                columns.append(key)
+    print(f"Columns: {columns}")
+
+    # Loop through financials and add to CSV.
+    data = []
+    for dict in financials['financials']:
+        values = []
+        for column in columns:
+            if column in dict:
+                values.append(dict[column])
+            else:
+                values.append('')
+        data.append(values)
+    with open(f"{symbol}_bs.csv", 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(columns)
         writer.writerows(data)
