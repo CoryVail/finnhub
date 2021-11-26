@@ -62,7 +62,7 @@ def main():
             worksheet = workbook.add_worksheet(type)
             for line in file.readlines():
                 col = 0
-                for item in line.split():
+                for item in line.split(","):
                     worksheet.write(row, col, item)
                     col += 1
                 row += 1
