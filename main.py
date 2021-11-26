@@ -55,13 +55,18 @@ def main():
         create_csv(c, symbol, type)
 
     # Create the Excel file.
-    row = 0
-    col = 0
     workbook = xlsxwriter.Workbook(f"{symbol}.xlsx")
     for type in types:
-        worksheet = workbook.add_worksheet(type)
-        worksheet.write(row, col, "hello")
-        row += 1
+        row = 0
+        col = 0
+        with open(f"{symbol}_{type}.csv", 'r') as file:
+            worksheet = workbook.add_worksheet(type)
+            for line in file.readlines():
+                print(f"line = {line}")
+                for item in line.split():
+                    worksheet.write(row, col, item)
+                    col += 1
+            row += 1
 
     workbook.close()
 
