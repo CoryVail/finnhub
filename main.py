@@ -1,6 +1,7 @@
 import argparse
 import csv
 import finnhub
+import xlsxwriter
 
 
 def create_csv(client, symbol, type):
@@ -48,9 +49,15 @@ def main():
     # Create a new Client object.
     c = finnhub.Client(api_key="sandbox_c620d3aad3iccpc4ang0")
 
-    create_csv(c, symbol, 'cf')
-    create_csv(c, symbol, 'ic')
-    create_csv(c, symbol, 'bs')
+    # Create the CSVs.
+    types = ['cf', 'ic', 'bs']
+    for type in types:
+        create_csv(c, symbol, type)
+
+    # Create the Excel file.
+    workbook = xlsxwriter.Workbook(f"{symbol}.xlsx")
+    for type in types:
+        worksheet = workbook.add_worksheet(type)
 
 if __name__ == "__main__":
     main()
