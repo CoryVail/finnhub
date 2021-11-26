@@ -55,9 +55,15 @@ def main():
         create_csv(c, symbol, type)
 
     # Create the Excel file.
+    row = 0
+    col = 0
     workbook = xlsxwriter.Workbook(f"{symbol}.xlsx")
     for type in types:
         worksheet = workbook.add_worksheet(type)
+        worksheet.write(row, col, "hello")
+        row += 1
+
+    workbook.close()
 
 if __name__ == "__main__":
     main()
