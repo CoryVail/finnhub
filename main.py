@@ -58,10 +58,10 @@ def main():
     workbook = xlsxwriter.Workbook(f"{symbol}.xlsx")
     for type in types:
         row = 0
-        col = 0
         with open(f"{symbol}_{type}.csv", 'r') as file:
             worksheet = workbook.add_worksheet(type)
             for line in file.readlines():
+                col = 0
                 for item in line.split():
                     worksheet.write(row, col, item)
                     col += 1
