@@ -46,7 +46,7 @@ def main():
     symbol = args.symbol.split(";")[0].strip()
 
     # Create a new Client object.
-    c = finnhub.Client(api_key="sandbox_c620d3aad3iccpc4ang0")
+    c = finnhub.Client(api_key="c63bv9qad3id43aa47t0")
 
     create_csv(c, symbol, 'cf')
     create_csv(c, symbol, 'ic')
